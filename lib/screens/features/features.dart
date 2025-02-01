@@ -1,4 +1,5 @@
 import 'package:educational_app_ui/model/category.dart';
+import 'package:educational_app_ui/screens/features/course_screen.dart';
 import 'package:educational_app_ui/screens/features/widgets/header_part.dart';
 import 'package:educational_app_ui/utils/app_colors.dart';
 import 'package:educational_app_ui/utils/ui_helper.dart';
@@ -51,7 +52,16 @@ class FeaturesScreen extends StatelessWidget {
                   crossAxisSpacing: 20),
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CourseScreen(
+                          category: categoryList[index],
+                        ),
+                      ),
+                    );
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
