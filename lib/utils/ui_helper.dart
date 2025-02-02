@@ -14,7 +14,7 @@ class UiHelper {
       maxLines: maxLine,
       style: TextStyle(
         height: height,
-        overflow: overflow ?? TextOverflow.ellipsis,
+        overflow: overflow,
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:educational_app_ui/model/course.dart';
+import 'package:educational_app_ui/screens/features/course_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:educational_app_ui/model/category.dart';
 import 'package:educational_app_ui/utils/custom_icon_button.dart';
@@ -40,8 +41,8 @@ class _CourseScreenState extends State<CourseScreen> {
               Row(
                 children: [
                   CustomIconButton(
-                      height: 35,
-                      width: 35,
+                      height: 40,
+                      width: 40,
                       color: Colors.white,
                       child: const Icon(Icons.arrow_back),
                       onTap: () {
@@ -49,7 +50,7 @@ class _CourseScreenState extends State<CourseScreen> {
                       }),
                   const Spacer(),
                   UiHelper.customText(
-                    text: "Courses",
+                    text: widget.category.name,
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ),
@@ -64,50 +65,69 @@ class _CourseScreenState extends State<CourseScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       itemBuilder: (context, index) {
                         final course = filteredCourse[index];
-                        return Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: UiHelper.networkImage(
-                                    image: course.image, height: 60, width: 70),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    UiHelper.customText(
-                                      height: 0,
-                                      maxLine: 2,
-                                      text: course.name,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    UiHelper.customText(
-                                      height: 0,
-                                      maxLine: 2,
-                                      text: "Author ${course.author}",
-                                      fontSize: 13,
-                                      color: Colors.black45,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    const SizedBox(height: 5,),
-                                     LinearProgressIndicator(
-                                      value: course.completedPercentage,
-                                    ),
-                                    UiHelper.customText(text: "${course.completedPercentage*100}% Completed")
-                                  ],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CourseDetailsScreen(
+                                  course: course,
                                 ),
-                              )
-                            ],
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: UiHelper.networkImage(
+                                      image: course.image,
+                                      height: 60,
+                                      width: 70),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      UiHelper.customText(
+                                        height: 0,
+                                        maxLine: 2,
+                                        text: course.name,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      UiHelper.customText(
+                                        height: 0,
+                                        maxLine: 2,
+                                        text: "Author ${course.author}",
+                                        fontSize: 13,
+                                        color: Colors.black45,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      LinearProgressIndicator(
+                                        value: course.completedPercentage,
+                                      ),
+                                      UiHelper.customText(
+                                          text:
+                                              "${course.completedPercentage * 100}% Completed")
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
